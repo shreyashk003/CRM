@@ -13,12 +13,14 @@ export async function POST(req: Request) {
     const db = client.db("crm");
 
     const user = await db.collection("users").findOne({ email });
+
     if (!user) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
+    const isValid = await bcrypt.compare(password, user.password);
+
+    if (!isValid) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
     }
 
@@ -28,18 +30,16 @@ export async function POST(req: Request) {
       { expiresIn: "1d" }
     );
 
-    const response = NextResponse.json({
-      message: "Login successful",
-      role: user.role
+    const res = NextResponse.json({ message: "Login successful", role: user.role });
+
+    res.cookies.set("token", token, {
+      httpOnly: true,
+      path: "/",
     });
 
-    response.cookies.set("token", token, {
-    httpOnly: true,
-    path: "/",          // REQUIRED
-    });
-
-    return response;
+    return res;
   } catch (err) {
+    console.error("LOGIN ERROR:", err);
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }

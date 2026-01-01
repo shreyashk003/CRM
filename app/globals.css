@@ -1,26 +1,121 @@
-@import "tailwindcss";
+/* ===== AUTH LAYOUT ===== */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.auth-wrapper {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.auth-brand {
+  padding: 4rem;
+  color: #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.auth-brand h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.auth-brand p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #cbd5f5;
+  max-width: 420px;
+}
+
+.auth-panel {
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 14px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.auth-card h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.auth-card span {
+  display: block;
+  margin-bottom: 1.5rem;
+  color: #64748b;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.auth-card input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.auth-card button {
+  width: 100%;
+  padding: 0.9rem;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-card button:hover {
+  background: #1d4ed8;
+}
+
+.auth-error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.auth-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-footer a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .auth-wrapper {
+    grid-template-columns: 1fr;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .auth-brand {
+    display: none;
+  }
 }
